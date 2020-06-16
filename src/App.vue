@@ -18,6 +18,7 @@
 import Vue from "vue";
 import PDFJS from "pdfjs-dist";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
+import jsPDF from "jspdf";
 
 PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
@@ -73,9 +74,11 @@ export default Vue.extend({
       }
       canvasContext.putImageData(imageData, 0, 0);
 
-      // FIXME: debug
-      open(canvas.toDataURL("image/png"));
-      //open(canvas2.toDataURL("image/png"));
+      // Convert into a PDF file
+      // TODO: Support formats other than portrait A4
+      const out = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+      out.addImage(canvas, 'JPEG', 0, 0, 210, 297);
+      out.output('dataurlnewwindow');
     }
   }
 });
