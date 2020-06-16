@@ -43,12 +43,25 @@ export default Vue.extend({
       // TODO: Get All pages
       const page = await pdf.getPage(1);
 
-      // Render a page on a virtual canvas
+      // Prepare a virtual canvas
       const canvas = document.createElement("canvas");
       const viewport = page.getViewport({ scale: 3 });
       canvas.height = viewport.height;
       canvas.width = viewport.width;
-      const canvasContext = canvas.getContext("2d");
+      const canvasContext = canvas.getContext("2d", { alpha: false });
+
+      // Slightly add distortion
+      const ratio = 0.008;
+      canvasContext.setTransform(
+        1 + (Math.random() * ratio - ratio/2),
+        Math.random() * ratio - ratio/2,
+        Math.random() * ratio - ratio/2,
+        1 + (Math.random() * ratio - ratio/2),
+        0,
+        0
+      );
+
+      // Render the page on the canvas
       await page.render({ canvasContext, viewport }).promise;
 
       // Add some random
