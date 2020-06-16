@@ -29,15 +29,15 @@
 <script lang="ts">
 import Vue from "vue";
 import PDFJS from "pdfjs-dist";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
 import jsPDF from "jspdf";
 
-PDFJS.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+PDFJS.GlobalWorkerOptions.workerSrc = require("pdfjs-dist/build/pdf.worker.entry");
 
-const readFile = file => {
+const readFile = (file: Blob): Promise<Uint8Array> => {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
-    fileReader.onload = () => resolve(new Uint8Array(fileReader.result));
+    fileReader.onload = () =>
+      resolve(new Uint8Array(fileReader.result as ArrayBuffer));
     fileReader.onerror = reject;
     fileReader.readAsArrayBuffer(file);
   });
@@ -47,9 +47,11 @@ export default Vue.extend({
   name: "App",
   components: {},
   methods: {
-    async convert(event) {
+    convert: async (event: Event) => {
       // Load the PDF
-      const file = event.target.files[0];
+      const files = (event.target as HTMLInputElement)?.files;
+      const file = files && files[0];
+      if (!file) throw "Invalid file";
       const typedarray = await readFile(file);
       const pdf = await PDFJS.getDocument(typedarray).promise;
 
@@ -62,6 +64,7 @@ export default Vue.extend({
       canvas.height = viewport.height;
       canvas.width = viewport.width;
       const canvasContext = canvas.getContext("2d", { alpha: false });
+      if (!canvasContext) throw "Canvas is null";
 
       // Slightly add distortion
       const ratio = 0.008;
