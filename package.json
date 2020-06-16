@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@types/pdfjs-dist": "^2.1.4",
     "core-js": "^3.6.5",
     "pdfjs-dist": "^2.4.456",
     "vue": "^2.6.11"
