@@ -11,13 +11,15 @@
       accept="application/pdf,.pdf"
       @change.prevent="convert"
     />
-    <ul class="notice">
-      <li>PDF ファイルにノイズと歪みを追加してスキャン風にします</li>
-      <li>ブラウザ上で動作するのでデータがネットワークを経由しません</li>
-      <li>A4 縦 PDF のみ対応 (今のところ)</li>
-      <li>1 ページ目のみ出力 (今のところ)</li>
-      <li>出力は白黒になります (今のところ)</li>
-    </ul>
+    <div class="notice">
+      <ul>
+        <li>PDF ファイルにノイズと歪みを追加してスキャン風にします</li>
+        <li>ブラウザ上で動作するのでデータがネットワークを経由しません</li>
+        <li>A4 縦 PDF のみ対応 (今のところ)</li>
+        <li>1 ページ目のみ出力 (今のところ)</li>
+        <li>出力は白黒になります (今のところ)</li>
+      </ul>
+    </div>
     <hr class="separator" />
     <address>
       <a href="https://wktk.jp/">wktk.jp</a> &middot;
@@ -140,9 +142,10 @@ export default Vue.extend({
 }
 
 .notice {
-  margin: auto;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   text-align: left;
-  width: max-content;
 }
 
 .separator {
