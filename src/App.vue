@@ -35,24 +35,34 @@ export default Vue.extend({
   components: {},
   methods: {
     async convert(event) {
+      // Load the PDF
       const file = event.target.files[0];
-      console.debug(file, file.name);
-
       const typedarray = await readFile(file);
       const pdf = await PDFJS.getDocument(typedarray).promise;
-      console.debug(pdf);
 
       // TODO: Get All pages
       const page = await pdf.getPage(1);
+
+      // Render a page on a virtual canvas
       const canvas = document.createElement("canvas");
-      const viewport = page.getViewport({ scale: 2 });
+      const viewport = page.getViewport({ scale: 3 });
       canvas.height = viewport.height;
       canvas.width = viewport.width;
-      await page.render({ canvasContext: canvas.getContext("2d"), viewport })
-        .promise;
+      const canvasContext = canvas.getContext("2d");
+      await page.render({ canvasContext, viewport }).promise;
+
+      // Add some random
+      const imageData = canvasContext.getImageData(0, 0, viewport.width, viewport.height);
+      for (let x = 0; x < imageData.data.length; x += 4) {
+        const data = imageData.data[x] + imageData.data[x + 1] + imageData.data[x + 2];
+        const white = data > (1 - Math.random() * 0.7) * 255 * 3;
+        imageData.data[x] = imageData.data[x + 1] = imageData.data[x + 2] = white ? 255 : 0;
+      }
+      canvasContext.putImageData(imageData, 0, 0);
 
       // FIXME: debug
       open(canvas.toDataURL("image/png"));
+      //open(canvas2.toDataURL("image/png"));
     }
   }
 });
