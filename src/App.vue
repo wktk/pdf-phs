@@ -68,7 +68,7 @@ export default Vue.extend({
       const imageData = canvasContext.getImageData(0, 0, viewport.width, viewport.height);
       for (let x = 0; x < imageData.data.length; x += 4) {
         const data = imageData.data[x] + imageData.data[x + 1] + imageData.data[x + 2];
-        const white = data > (1 - Math.random() * 0.7) * 255 * 3;
+        const white = data > (1 - Math.random() * 0.8) * 255 * 3;
         imageData.data[x] = imageData.data[x + 1] = imageData.data[x + 2] = white ? 255 : 0;
       }
       canvasContext.putImageData(imageData, 0, 0);
