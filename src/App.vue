@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>PDF にスキャン風のノイズを乗せるやつ</h1>
+    <h1>PDF にノイズを乗せる &beta;</h1>
     <button id="upload" onclick="document.getElementById('file').click()">
       PDF ファイルを選択...
     </button>
@@ -11,6 +11,18 @@
       accept="application/pdf,.pdf"
       @change.prevent="convert"
     />
+    <ul class="notice">
+      <li>PDF ファイルにノイズと歪みを追加してスキャン風にします</li>
+      <li>ブラウザ上で動作するのでデータがネットワークを経由しません</li>
+      <li>A4 縦 PDF のみ対応 (今のところ)</li>
+      <li>1 ページ目のみ出力 (今のところ)</li>
+      <li>出力は白黒になります (今のところ)</li>
+    </ul>
+    <hr class="separator" />
+    <address>
+      <a href="https://wktk.jp/">wktk.jp</a> &middot;
+      <a href="https://twitter.com/wk">@wk</a>
+    </address>
   </div>
 </template>
 
@@ -110,5 +122,15 @@ export default Vue.extend({
 
 #file {
   visibility: hidden;
+}
+
+.notice {
+  margin: auto;
+  text-align: left;
+  width: max-content;
+}
+
+.separator {
+  margin: 4em auto;
 }
 </style>
