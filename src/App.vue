@@ -105,7 +105,7 @@ export default Vue.extend({
         format: "a4"
       });
       out.addImage(canvas, "JPEG", 0, 0, 210, 297);
-      out.output("dataurlnewwindow");
+      open(out.output("datauristring"));
     }
   }
 });
