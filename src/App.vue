@@ -125,7 +125,7 @@ export default Vue.extend({
         out.addImage(canvas, "JPEG", 0, 0, 210, 297);
       }
 
-      open(out.output("datauristring"));
+      out.save(file.name.replace(/.pdf$/i, "-scan.pdf"));
     }
   }
 });
