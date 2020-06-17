@@ -18,7 +18,6 @@
         </li>
         <li>ブラウザ上で動作するのでデータがネットワークを経由しません</li>
         <li>A4 縦 PDF のみ対応 (今のところ)</li>
-        <li>1 ページ目のみ出力 (今のところ)</li>
         <li>出力は白黒になります (今のところ)</li>
       </ul>
     </div>
@@ -73,58 +72,59 @@ export default Vue.extend({
       const typedarray = await readFile(file);
       const pdf = await PDFJS.getDocument(typedarray).promise;
 
-      // TODO: Get All pages
-      const page = await pdf.getPage(1);
-
-      // Prepare a virtual canvas
-      const canvas = document.createElement("canvas");
-      const viewport = page.getViewport({ scale: 3 });
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
-      const canvasContext = canvas.getContext("2d", { alpha: false });
-      if (!canvasContext) throw "Canvas is null";
-
-      // Slightly add distortion
-      const ratio = 0.008;
-      canvasContext.setTransform(
-        1 + (Math.random() * ratio - ratio / 2),
-        Math.random() * ratio - ratio / 2,
-        Math.random() * ratio - ratio / 2,
-        1 + (Math.random() * ratio - ratio / 2),
-        0,
-        0
-      );
-
-      // Render the page on the canvas
-      await page.render({ canvasContext, viewport }).promise;
-
-      // Add some random errors
-      // TODO: Support colors
-      // TODO: Support adjusting tint
-      const imageData = canvasContext.getImageData(
-        0,
-        0,
-        viewport.width,
-        viewport.height
-      );
-      for (let x = 0; x < imageData.data.length; x += 4) {
-        const data =
-          imageData.data[x] + imageData.data[x + 1] + imageData.data[x + 2];
-        const white = data > (1 - Math.random() * 0.8) * 255 * 3;
-        imageData.data[x] = imageData.data[x + 1] = imageData.data[
-          x + 2
-        ] = white ? 255 : 0;
-      }
-      canvasContext.putImageData(imageData, 0, 0);
-
-      // Convert into a PDF file
       // TODO: Support formats other than portrait A4
-      const out = new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: "a4"
-      });
-      out.addImage(canvas, "JPEG", 0, 0, 210, 297);
+      const orientation = "portrait";
+      const format = "a4";
+      const out = new jsPDF({ orientation, format, unit: "mm" });
+
+      for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+
+        // Prepare a virtual canvas
+        const canvas = document.createElement("canvas");
+        const viewport = page.getViewport({ scale: 3 });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        const canvasContext = canvas.getContext("2d", { alpha: false });
+        if (!canvasContext) throw "Canvas is null";
+
+        // Slightly add distortion
+        const ratio = 0.008;
+        canvasContext.setTransform(
+          1 + (Math.random() * ratio - ratio / 2),
+          Math.random() * ratio - ratio / 2,
+          Math.random() * ratio - ratio / 2,
+          1 + (Math.random() * ratio - ratio / 2),
+          0,
+          0
+        );
+
+        // Render the page on the canvas
+        await page.render({ canvasContext, viewport }).promise;
+
+        // Add some random errors
+        // TODO: Support colors
+        // TODO: Support adjusting tint
+        const imageData = canvasContext.getImageData(
+          0,
+          0,
+          viewport.width,
+          viewport.height
+        );
+        for (let x = 0; x < imageData.data.length; x += 4) {
+          const data =
+            imageData.data[x] + imageData.data[x + 1] + imageData.data[x + 2];
+          const white = data > (1 - Math.random() * 0.8) * 255 * 3;
+          imageData.data[x] = imageData.data[x + 1] = imageData.data[
+            x + 2
+          ] = white ? 255 : 0;
+        }
+        canvasContext.putImageData(imageData, 0, 0);
+
+        if (i !== 1) out.addPage(format, orientation);
+        out.addImage(canvas, "JPEG", 0, 0, 210, 297);
+      }
+
       open(out.output("datauristring"));
     }
   }
