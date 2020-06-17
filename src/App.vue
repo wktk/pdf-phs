@@ -99,6 +99,8 @@ export default Vue.extend({
       await page.render({ canvasContext, viewport }).promise;
 
       // Add some random errors
+      // TODO: Support colors
+      // TODO: Support adjusting tint
       const imageData = canvasContext.getImageData(
         0,
         0,
