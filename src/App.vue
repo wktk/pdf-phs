@@ -25,6 +25,8 @@
       <a href="https://wktk.jp/">wktk.jp</a> &middot;
       <a href="https://twitter.com/wk">@wk</a>
     </address>
+
+    <Forkme />
   </div>
 </template>
 
@@ -32,6 +34,8 @@
 import Vue from "vue";
 import PDFJS from "pdfjs-dist";
 import jsPDF from "jspdf";
+
+import Forkme from "./components/Forkme.vue";
 
 PDFJS.GlobalWorkerOptions.workerSrc = require("pdfjs-dist/build/pdf.worker.entry");
 
@@ -47,7 +51,9 @@ const readFile = (file: Blob): Promise<Uint8Array> => {
 
 export default Vue.extend({
   name: "App",
-  components: {},
+  components: {
+    Forkme
+  },
   methods: {
     convert: async (event: Event) => {
       // Load the PDF
@@ -150,5 +156,9 @@ export default Vue.extend({
 
 .separator {
   margin: 4em auto;
+}
+
+address {
+  margin-bottom: 0.5em;
 }
 </style>
