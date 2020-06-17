@@ -98,7 +98,7 @@ export default Vue.extend({
       // Render the page on the canvas
       await page.render({ canvasContext, viewport }).promise;
 
-      // Add some random
+      // Add some random errors
       const imageData = canvasContext.getImageData(
         0,
         0,
