@@ -22,6 +22,12 @@
         <li>出力は白黒になります (今のところ)</li>
       </ul>
     </div>
+    <h2>利用例</h2>
+    <Tweet
+      class="tweet"
+      id="1272963828490231808"
+      :options="{ conversation: 'none' }"
+    />
     <hr class="separator" />
     <address>
       <a href="https://wktk.jp/">wktk.jp</a> &middot;
@@ -37,6 +43,7 @@ import Vue from "vue";
 import PDFJS from "pdfjs-dist";
 import jsPDF from "jspdf";
 
+import { Tweet } from "vue-tweet-embed";
 import Forkme from "./components/Forkme.vue";
 
 PDFJS.GlobalWorkerOptions.workerSrc = require("pdfjs-dist/build/pdf.worker.entry");
@@ -54,7 +61,8 @@ const readFile = (file: Blob): Promise<Uint8Array> => {
 export default Vue.extend({
   name: "App",
   components: {
-    Forkme
+    Forkme,
+    Tweet
   },
   methods: {
     convert: async (event: Event) => {
@@ -154,6 +162,13 @@ export default Vue.extend({
   display: flex;
   flex-direction: column;
   text-align: left;
+}
+
+.tweet {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
 .separator {

@@ -13,7 +13,8 @@
     "core-js": "^3.6.5",
     "jspdf": "^1.5.3",
     "pdfjs-dist": "^2.4.456",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-tweet-embed": "^2.4.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.33.0",
