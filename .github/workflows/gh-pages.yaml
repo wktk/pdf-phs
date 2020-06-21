@@ -29,7 +29,6 @@ jobs:
           TAG: ${{ steps.generate-tag.outputs.value }}
 
       - name: Create Release
-        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -37,5 +36,3 @@ jobs:
           tag_name: ${{ steps.generate-tag.outputs.value }}
           release_name: Release ${{ steps.generate-tag.outputs.value }}
           body: Release ${{ steps.generate-tag.outputs.value }}
-          draft: false
-          prerelease: false
