@@ -34,5 +34,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.generate-tag.outputs.value }}
-          release_name: Release ${{ steps.generate-tag.outputs.value }}
-          body: Release ${{ steps.generate-tag.outputs.value }}
+          release_name: Deployment @ ${{ steps.generate-tag.outputs.value }}
+          body: Deployment @ ${{ steps.generate-tag.outputs.value }}
