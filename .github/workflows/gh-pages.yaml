@@ -1,0 +1,22 @@
+name: Publish GitHub Pages
+on:
+  push:
+    branches: [master]
+
+jobs:
+  gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build Pages
+        run: |
+          yarn install --frozen-lockfile
+          yarn build
+
+      - name: Publish GitHub Pages
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/wktk/pdf-phs.git
+          yarn deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
