@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import PDFJS from "pdfjs-dist";
+import * as PDFJS from "pdfjs-dist";
 import jsPDF from "jspdf";
 
 import { Tweet } from "vue-tweet-embed";
