@@ -10,10 +10,9 @@
   },
   "dependencies": {
     "@types/jspdf": "^2.0.0",
-    "@types/pdfjs-dist": "^2.1.4",
     "gh-pages": "^5.0.0",
     "jspdf": "^2.5.1",
-    "pdfjs-dist": "^2.4.456",
+    "pdfjs-dist": "^3.9.179",
     "vue": "^2.6.11",
     "vue-tweet-embed": "^2.4.0"
   },
