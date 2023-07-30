@@ -22,11 +22,7 @@
       </ul>
     </div>
     <h2>出力例</h2>
-    <Tweet
-      class="tweet"
-      id="1272963828490231808"
-      :options="{ conversation: 'none' }"
-    />
+    <Tweet class="tweet" tweet-id="1272963828490231808" conversation="none" />
     <hr class="separator" />
     <address>
       <a href="https://wktk.jp/">wktk.jp</a> &middot;
@@ -38,11 +34,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import * as PDFJS from "pdfjs-dist";
 import jsPDF from "jspdf";
 
-import { Tweet } from "vue-tweet-embed";
+import Tweet from "vue-tweet";
 import ForkMe from "./components/ForkMe.vue";
 
 PDFJS.GlobalWorkerOptions.workerSrc = require("pdfjs-dist/build/pdf.worker.entry");
@@ -57,7 +53,7 @@ const readFile = (file: Blob): Promise<Uint8Array> => {
   });
 };
 
-export default Vue.extend({
+export default defineComponent({
   name: "App",
   components: {
     ForkMe,
@@ -168,9 +164,7 @@ export default Vue.extend({
 }
 
 .tweet {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+  width: 500px;
   margin: auto;
 }
 
