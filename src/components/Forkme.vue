@@ -1,8 +1,6 @@
 <template>
   <span id="forkongithub">
-    <a href="https://github.com/wktk/pdf-phs">
-      Fork me on GitHub
-    </a>
+    <a href="https://github.com/wktk/pdf-phs"> Fork me on GitHub </a>
   </span>
 </template>
 
@@ -10,7 +8,7 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "Forkme"
+  name: "ForkMe",
 });
 </script>
 

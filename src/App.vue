@@ -33,7 +33,7 @@
       <a href="https://twitter.com/wk">@wk</a>
     </address>
 
-    <Forkme />
+    <ForkMe />
   </div>
 </template>
 
@@ -43,7 +43,7 @@ import * as PDFJS from "pdfjs-dist";
 import jsPDF from "jspdf";
 
 import { Tweet } from "vue-tweet-embed";
-import Forkme from "./components/Forkme.vue";
+import ForkMe from "./components/ForkMe.vue";
 
 PDFJS.GlobalWorkerOptions.workerSrc = require("pdfjs-dist/build/pdf.worker.entry");
 
@@ -60,8 +60,8 @@ const readFile = (file: Blob): Promise<Uint8Array> => {
 export default Vue.extend({
   name: "App",
   components: {
-    Forkme,
-    Tweet
+    ForkMe,
+    Tweet,
   },
   methods: {
     convert: async (event: Event) => {
@@ -96,7 +96,7 @@ export default Vue.extend({
           Math.random() * ratio - ratio / 2,
           1 + (Math.random() * ratio - ratio / 2),
           0,
-          0
+          0,
         );
 
         // Render the page on the canvas
@@ -109,15 +109,16 @@ export default Vue.extend({
           0,
           0,
           viewport.width,
-          viewport.height
+          viewport.height,
         );
         for (let x = 0; x < imageData.data.length; x += 4) {
           const data =
             imageData.data[x] + imageData.data[x + 1] + imageData.data[x + 2];
           const white = data > (1 - Math.random() * 0.8) * 255 * 3;
-          imageData.data[x] = imageData.data[x + 1] = imageData.data[
-            x + 2
-          ] = white ? 255 : 0;
+          imageData.data[x] =
+            imageData.data[x + 1] =
+            imageData.data[x + 2] =
+              white ? 255 : 0;
         }
         canvasContext.putImageData(imageData, 0, 0);
 
@@ -126,8 +127,8 @@ export default Vue.extend({
       }
 
       out.save(file.name.replace(/.pdf$/i, "-scan.pdf"));
-    }
-  }
+    },
+  },
 });
 </script>
 
