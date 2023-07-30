@@ -9,7 +9,6 @@
     "deploy": "gh-pages -d dist -u 'github-actions <41898282+github-actions@users.noreply.github.com>'"
   },
   "dependencies": {
-    "@types/jspdf": "^2.0.0",
     "gh-pages": "^5.0.0",
     "jspdf": "^2.5.1",
     "pdfjs-dist": "^3.9.179",
