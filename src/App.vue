@@ -41,7 +41,7 @@ import jsPDF from "jspdf";
 import Tweet from "vue-tweet";
 import ForkMe from "./components/ForkMe.vue";
 
-PDFJS.GlobalWorkerOptions.workerSrc = require("pdfjs-dist/build/pdf.worker.entry");
+PDFJS.GlobalWorkerOptions.workerSrc = require("pdfjs-dist/build/pdf.worker.mjs");
 
 const readFile = (file: Blob): Promise<Uint8Array> => {
   return new Promise((resolve, reject) => {
