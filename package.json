@@ -11,7 +11,7 @@
   "dependencies": {
     "gh-pages": "^6.0.0",
     "jspdf": "^2.5.1",
-    "pdfjs-dist": "^4.0.0",
+    "pdfjs-dist": "^4.2.67",
     "vue": "^3.3.4",
     "vue-tweet": "^2.0.2"
   },
