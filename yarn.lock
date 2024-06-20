@@ -6565,13 +6565,11 @@ vue-template-es2015-compiler@^1.9.0:
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
 vue-tweet@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/vue-tweet/-/vue-tweet-2.0.2.tgz#b49f872d25515ca5d56dd545d99d8e3f086e2de3"
-  integrity sha512-a1tmxnOcL8MrBJBiCzoFw8njpaoVWc0pkuaBnEBKs7kdmr5qKjHlSMhjoukPPSLENPjPnRjrJnKEcu0D8+bXNw==
-  dependencies:
-    vue "^3.2.36"
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/vue-tweet/-/vue-tweet-2.3.1.tgz#50867ce62bb016f62e4d0a695c347f44c6a0845c"
+  integrity sha512-n8dKawDjEkNk4pkoiETGjB9s0OIT51i37zcgkrf2JnVx0NLGvLYesedVz3UHG7krAPGjGQ7pm1QZkTJC2oGs6w==
 
-vue@^3.2.36, vue@^3.3.4:
+vue@^3.3.4:
   version "3.4.7"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.4.7.tgz#b9673ceaf3400b7e65031140d14be6a27b52f301"
   integrity sha512-4urmkWpudekq0CPNMO7p6mBGa9qmTXwJMO2r6CT4EzIJVG7WoSReiysiNb7OSi/WI113oX0Srn9Rz1k/DCXKFQ==
